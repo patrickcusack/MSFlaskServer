@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Status>
+   <CreateJobStatusOutputData>
+      <DataRate>0</DataRate>
+      <FileBeingEncrypted></FileBeingEncrypted>
+      <LogEntry>
+         <listitem>Starting job processing: Thu Apr 2 17:53:21 2015</listitem>
+         <listitem>initialising log</listitem>
+         <listitem>Checking Task File format</listitem>
+         <listitem>Create job from template detected</listitem>
+         <listitem>Connected to Endpoint, attempting to login</listitem>
+         <listitem>Logged In</listitem>
+         <listitem>Failed to perform web-service operation 'getStationUser' with following error '28'</listitem>
+         <listitem>Failed to perform web-service operation 'getStationUser' with following error '28'</listitem>
+      </LogEntry>
+      <TaskProgress>0</TaskProgress>
+      <TotalProgress>0</TotalProgress>
+   </CreateJobStatusOutputData>
+</Status>

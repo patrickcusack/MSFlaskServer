@@ -1,0 +1,8 @@
+{"encryptorApplicationPath":"C:\\Program Files (x86)\\MediaSeal\\Encryptor\\Encryptor.exe",
+"decryptorApplicationPath":"C:\\Program Files (x86)\\MediaSeal\\DeArchiver\\DeArchiver.exe",
+"decryptorSlots":"4",
+"jobStatusOuputPath":"C:\\ProgramData\\MSWS\\jobstatusoutputpath.xml",
+"templateID":"3427",
+"templateJobName":"WebService",
+"username":"wsclient",
+"password":"Seneca2315"}

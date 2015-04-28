@@ -1,0 +1,170 @@
+http://127.0.0.1/DecryptAsset
+POST sourceFilePath, destinationFilePath
+
+decryption submitted, 202
+{
+    "links": [
+        "/jobStatus/114111885117942101128758750890036297736",
+        "/jobStatus?UUID=114111885117942101128758750890036297736",
+        "/cancelJob/114111885117942101128758750890036297736",
+        "/cancelJob?UUID=114111885117942101128758750890036297736"
+    ],
+    "status": "OK",
+    "uuid": "114111885117942101128758750890036297736"
+}
+
+decryption conflict, 409
+
+{
+    "errors": [
+        "The source file and destination file are already in use."
+    ],
+    "status": "Unable to process request."
+}
+
+decryption error, bad arguments, 400
+
+
+
+http://127.0.0.1/jobStatus/UUID
+http://127.0.0.1/jobStatus?UUID=0123456789
+GET
+
+status running, 200
+{
+    "destinationFile": "F:\\Canon Video Files\\Examine2\\temp\\R7AB-Apple ProRes 23.98 1080p 8192 H264.mov",
+    "lastLogItem": "Decrypting File.",
+    "links": [
+        [
+            "/jobStatus/114111885117942101128758750890036297736",
+            "/jobStatus?UUID=114111885117942101128758750890036297736",
+            "/cancelJob/114111885117942101128758750890036297736",
+            "/cancelJob?UUID=114111885117942101128758750890036297736"
+        ]
+    ],
+    "operationStatus": 1,
+    "returnCode": -100,
+    "sourceFile": "F:\\Canon Video Files\\Examine2\\R7AB-Apple ProRes 23.98 1080p 8192 H264-enc.mov",
+    "timeRemaining": "26.76",
+    "totalProgress": "57.63"
+}
+
+status finished, 200
+
+{
+    "destinationFile": "F:\\Canon Video Files\\Examine2\\temp\\R7AB-Apple ProRes 23.98 1080p 8192 H264.mov",
+    "lastLogItem": "Decryption has finished.",
+    "links": [
+        [
+            "/jobStatus/231184964099623247375097261333202075656",
+            "/jobStatus?UUID=231184964099623247375097261333202075656"
+        ]
+    ],
+    "operationStatus": 2,
+    "returnCode": 0,
+    "sourceFile": "F:\\Canon Video Files\\Examine2\\R7AB-Apple ProRes 23.98 1080p 8192 H264-enc.mov",
+    "timeRemaining": "0.00",
+    "totalProgress": "100.00"
+}
+
+
+http://127.0.0.1/cancelJob/UUID
+http://127.0.0.1/cancelJob?UUID=0123456789
+GET
+
+cancel success, 202
+{
+    "links": [
+        "/jobStatus/192070812547956086547101366935900651528",
+        "/jobStatus?UUID=192070812547956086547101366935900651528"
+    ],
+    "status": "OK"
+}
+
+cancel failed, 400 (No job), 503 (Encryptor is running by a user)
+{
+    "errors": [
+        "The Job with UUID 114111885117942101128758750890036297736 is not running. Please check the job number passed in the request."
+    ],
+    "links": [
+        "/DecryptorStatus"
+    ],
+    "status": "Unable to process request."
+}
+
+
+http://127.0.0.1/EncryptAsset
+POST sourceFilePath, destinationFolderPath
+
+Encrypt Submit, 202
+{
+    "links": [
+        "/jobStatus/331312060622271126623512554285857505288",
+        "/jobStatus?UUID=331312060622271126623512554285857505288",
+        "/cancelJob/331312060622271126623512554285857505288",
+        "/cancelJob?UUID=331312060622271126623512554285857505288"
+    ],
+    "status": "OK",
+    "uuid": "331312060622271126623512554285857505288"
+}
+
+Encrypt Submit Fail, 409 (Encyrptor is busy), 503 (someone is using the encryptor outside of the service)
+{
+    "currentUUID": "331312060622271126623512554285857505288",
+    "info": "Encryptor is in use for the next 74.93 seconds.",
+    "links": [
+        "/jobStatus/331312060622271126623512554285857505288",
+        "/jobStatus?UUID=331312060622271126623512554285857505288",
+        "/cancelJob/331312060622271126623512554285857505288",
+        "/cancelJob?UUID=331312060622271126623512554285857505288"
+    ],
+    "status": "Unable to process request.",
+    "timeRemaining": "74.93"
+}
+
+http://127.0.0.1/EncryptorStatus
+GET
+
+Encrypt Status, 200
+{
+    "destinationFile": "F:\\temp\\Avid_DNxHD_Test_Movie.mov",
+    "lastLogItem": "Connected to Endpoint, attempting to login",
+    "links": [
+        [
+            "/jobStatus/331312060622271126623512554285857505288",
+            "/jobStatus?UUID=331312060622271126623512554285857505288",
+            "/cancelJob/331312060622271126623512554285857505288",
+            "/cancelJob?UUID=331312060622271126623512554285857505288"
+        ]
+    ],
+    "operationStatus": 1,
+    "returnCode": -100,
+    "sourceFile": "F:\\Avid_DNxHD_Test_Movie.mov",
+    "timeRemaining": "-1",
+    "totalProgress": "0"
+}
+
+Encrypt Result, 200
+{
+    "destinationFile": "F:\\temp\\Avid_DNxHD_Test_Movie.mov",
+    "lastLogItem": "Duration 362s",
+    "links": [
+        [
+            "/jobStatus/80152362345698445010798274216682586120",
+            "/jobStatus?UUID=80152362345698445010798274216682586120"
+        ]
+    ],
+    "operationStatus": 2,
+    "returnCode": 0,
+    "sourceFile": "F:\\Source\\Avid_DNxHD_Test_Movie.mov",
+    "timeRemaining": "0.00",
+    "totalProgress": "100"
+}
+
+
+Operation Codes
+
+-100, not begun
+-2, cancelled
+2, finished
+return code should be 0, otherwise an error will be greater than 0 and typically 6
